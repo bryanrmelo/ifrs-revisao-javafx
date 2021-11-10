@@ -1,6 +1,10 @@
 package application.model;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private long id;
 
@@ -61,5 +65,51 @@ public class Usuario {
 
 	public void setData(String data) {
 		this.data = data;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((data == null) ? 0 : data.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + telefone;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (data == null) {
+			if (other.data != null)
+				return false;
+		} else
+			if (!data.equals(other.data))
+				return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else
+			if (!email.equals(other.email))
+				return false;
+		if (id != other.id)
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else
+			if (!nome.equals(other.nome))
+				return false;
+		if (telefone != other.telefone)
+			return false;
+		return true;
 	}
 }

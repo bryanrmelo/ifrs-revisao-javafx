@@ -72,7 +72,7 @@ public class MainController implements Initializable {
 		colunaData.setCellValueFactory(new PropertyValueFactory<Usuario, String>("data"));
 
 		try {
-			// tabela.getItems().setAll(usuarioRepo.buscarTodos());
+			tabela.getItems().setAll(usuarioRepo.buscarTodos());
 
 		} catch (Exception e) {
 			e.printStackTrace();
