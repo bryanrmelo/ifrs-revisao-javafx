@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 public class MainController implements Initializable {
 
+	@SuppressWarnings("unused")
 	private UsuarioRepository usuarioRepo = new UsuarioRepository();
 
 	@FXML
@@ -36,12 +37,13 @@ public class MainController implements Initializable {
 		Stage stage = (Stage) adicionar.getScene().getWindow();
 		stage.close();
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Adicionar.FXML"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../samples/Adicionar.FXML"));
 			Parent root = (Parent) fxmlLoader.load();
 			Stage stageNew = new Stage();
 			stageNew.setScene(new Scene(root));
 			stageNew.show();
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Erro!");
 		}
 	}
@@ -50,7 +52,7 @@ public class MainController implements Initializable {
 		Stage stage = (Stage) adicionar.getScene().getWindow();
 		stage.close();
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Excluir.FXML"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../samples/Excluir.FXML"));
 			Parent root = (Parent) fxmlLoader.load();
 			Stage stageNew = new Stage();
 			stageNew.setScene(new Scene(root));
@@ -70,9 +72,10 @@ public class MainController implements Initializable {
 		colunaData.setCellValueFactory(new PropertyValueFactory<Usuario, String>("data"));
 
 		try {
-			tabela.getItems().setAll(usuarioRepo.buscarTodos());
+			// tabela.getItems().setAll(usuarioRepo.buscarTodos());
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Erro!");
 		}
 	}
