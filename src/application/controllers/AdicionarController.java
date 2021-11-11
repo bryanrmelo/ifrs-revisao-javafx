@@ -1,16 +1,24 @@
 package application.controllers;
 
+import application.exceptions.AdicaoFalhouException;
+import application.model.Usuario;
+import application.repository.UsuarioRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AdicionarController {
+
+	private Usuario usuario = new Usuario();
+
+	private UsuarioRepository usuarioRepo = new UsuarioRepository();
 
 	@FXML
 	private TextField nome;
@@ -35,7 +43,18 @@ public class AdicionarController {
 
 	@FXML
 	void adicionarBotaoHandler(ActionEvent event) {
-
+		try {
+			usuarioRepo.adiciona(usuario);
+			Alert dialogoAviso = new Alert(Alert.AlertType.INFORMATION);
+			dialogoAviso.setTitle("AVISO");
+			dialogoAviso.setContentText("Adi��o conclu�da com sucesso!");
+			dialogoAviso.showAndWait();
+		} catch (AdicaoFalhouException e) {
+			Alert dialogoAviso = new Alert(Alert.AlertType.ERROR);
+			dialogoAviso.setTitle("ERRO");
+			dialogoAviso.setContentText("Adi��o falhou!");
+			dialogoAviso.showAndWait();
+		}
 	}
 
 	@FXML

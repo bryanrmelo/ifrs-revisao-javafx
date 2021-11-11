@@ -1,5 +1,6 @@
 package application.repository;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,11 +19,13 @@ public class UsuarioRepository implements RepositoryInterface {
 	@Override
 	public void adiciona(Usuario usuario) throws AdicaoFalhouException {
 		try {
-			FileOutputStream fos = new FileOutputStream("../arquivo.bin", true);
+			List<Usuario> usuarios = buscarTodos();
+			usuarios.add(usuario);
+			FileOutputStream fos = new FileOutputStream("resources/arquivo.bin", true);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(usuario);
+			oos.writeObject(usuarios);
 			oos.close();
-		} catch (IOException e) {
+		} catch (IOException | BuscaFalhouException e) {
 			e.printStackTrace();
 		}
 	}
@@ -38,18 +41,19 @@ public class UsuarioRepository implements RepositoryInterface {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Usuario> buscarTodos() throws BuscaFalhouException {
 		List<Usuario> usuarios = new ArrayList<>();
 		try {
-			Usuario usuario;
-			FileInputStream fis = new FileInputStream("../arquivo.bin");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			while (ois.readObject() != null) {
-				usuario = (Usuario) ois.readObject();
-				usuarios.add(usuario);
-			}
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("resources/arquivo.bin"));
+
+			List<Usuario> readObject = (ArrayList<Usuario>) ois.readObject();
+			usuarios = readObject;
+
 			ois.close();
+		} catch (EOFException e) {
+			return usuarios;
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
