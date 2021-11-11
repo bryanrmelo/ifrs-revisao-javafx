@@ -1,3 +1,4 @@
 bin/
 build.fxbuild
 .project
+.settings/
