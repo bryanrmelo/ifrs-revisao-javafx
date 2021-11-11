@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import application.model.Usuario;
 import application.repository.UsuarioRepository;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,6 @@ import javafx.stage.Stage;
 
 public class MainController implements Initializable {
 
-	@SuppressWarnings("unused")
 	private UsuarioRepository usuarioRepo = new UsuarioRepository();
 
 	@FXML
@@ -72,7 +72,7 @@ public class MainController implements Initializable {
 		colunaData.setCellValueFactory(new PropertyValueFactory<Usuario, String>("data"));
 
 		try {
-			tabela.getItems().setAll(usuarioRepo.buscarTodos());
+			tabela.getItems().setAll(FXCollections.observableList(usuarioRepo.buscarTodos()));
 
 		} catch (Exception e) {
 			e.printStackTrace();

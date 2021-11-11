@@ -47,10 +47,8 @@ public class UsuarioRepository implements RepositoryInterface {
 		List<Usuario> usuarios = new ArrayList<>();
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("resources/arquivo.bin"));
-
 			List<Usuario> readObject = (ArrayList<Usuario>) ois.readObject();
 			usuarios = readObject;
-
 			ois.close();
 		} catch (EOFException e) {
 			return usuarios;
