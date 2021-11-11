@@ -3,12 +3,14 @@ package application.controllers;
 import application.exceptions.AdicaoFalhouException;
 import application.model.Usuario;
 import application.repository.UsuarioRepository;
+import application.utils.DateUtils;
+import application.utils.MessageUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -43,17 +45,18 @@ public class AdicionarController {
 
 	@FXML
 	void adicionarBotaoHandler(ActionEvent event) {
+
+		usuario.setId(Long.parseLong(id.getText()));
+		usuario.setNome(nome.getText());
+		usuario.setEmail(email.getText());
+		usuario.setTelefone(Integer.parseInt(telefone.getText()));
+		usuario.setData(DateUtils.converterData(data));
+
 		try {
 			usuarioRepo.adiciona(usuario);
-			Alert dialogoAviso = new Alert(Alert.AlertType.INFORMATION);
-			dialogoAviso.setTitle("AVISO");
-			dialogoAviso.setContentText("Adi��o conclu�da com sucesso!");
-			dialogoAviso.showAndWait();
+			MessageUtils.mostrarAlert("Adição", AlertType.INFORMATION);
 		} catch (AdicaoFalhouException e) {
-			Alert dialogoAviso = new Alert(Alert.AlertType.ERROR);
-			dialogoAviso.setTitle("ERRO");
-			dialogoAviso.setContentText("Adi��o falhou!");
-			dialogoAviso.showAndWait();
+			MessageUtils.mostrarAlert("Adição", AlertType.ERROR);
 		}
 	}
 

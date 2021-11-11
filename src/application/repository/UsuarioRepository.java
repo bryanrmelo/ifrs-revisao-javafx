@@ -21,11 +21,23 @@ public class UsuarioRepository implements RepositoryInterface {
 		try {
 			List<Usuario> usuarios = buscarTodos();
 			usuarios.add(usuario);
-			FileOutputStream fos = new FileOutputStream("resources/arquivo.bin", true);
+			FileOutputStream fos = new FileOutputStream("resources/arquivo.bin");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(usuarios);
 			oos.close();
 		} catch (IOException | BuscaFalhouException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void salvar(List<Usuario> usuarios) throws AdicaoFalhouException {
+		try {
+			FileOutputStream fos = new FileOutputStream("resources/arquivo.bin");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(usuarios);
+			oos.close();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -60,21 +72,21 @@ public class UsuarioRepository implements RepositoryInterface {
 	}
 
 	@Override
-	public void excluir(Usuario usuario) throws ExclusaoFalhouException {
-		List<Usuario> usuarios = new ArrayList<>();
+	public void excluir(Usuario usuario) throws ExclusaoFalhouException, BuscaFalhouException {
+		List<Usuario> usuarios = buscarTodos();
+
 		for (Usuario u : usuarios) {
 			if (u.getId() == usuario.getId()) {
 				usuarios.remove(u);
 			}
 		}
 
-		for (Usuario u : usuarios) {
-			try {
-				adiciona(u);
-			} catch (AdicaoFalhouException e) {
-				e.printStackTrace();
-			}
+		try {
+			salvar(usuarios);
+		} catch (AdicaoFalhouException e) {
+			e.printStackTrace();
 		}
+
 	}
 
 }

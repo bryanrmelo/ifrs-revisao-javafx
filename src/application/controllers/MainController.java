@@ -73,6 +73,7 @@ public class MainController implements Initializable {
 
 		try {
 			tabela.getItems().setAll(FXCollections.observableList(usuarioRepo.buscarTodos()));
+			System.out.println(usuarioRepo.buscarTodos());
 
 		} catch (Exception e) {
 			e.printStackTrace();

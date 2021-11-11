@@ -10,10 +10,12 @@ public interface RepositoryInterface {
 
 	public void adiciona(Usuario usuario) throws AdicaoFalhouException;
 
+	public void salvar(List<Usuario> usuarios) throws AdicaoFalhouException;
+
 	public Usuario buscarPorId(long id) throws BuscaFalhouException;
 
 	public List<Usuario> buscarTodos() throws BuscaFalhouException;
 
-	public void excluir(Usuario usuario) throws ExclusaoFalhouException;
+	public void excluir(Usuario usuario) throws ExclusaoFalhouException, BuscaFalhouException;
 
 }
