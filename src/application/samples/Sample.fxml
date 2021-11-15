@@ -11,9 +11,9 @@
       <TableView fx:id="tabela" prefHeight="300.0" prefWidth="600.0">
         <columns>
             <TableColumn fx:id="colunaId" prefWidth="39.0" text="ID" />
-          <TableColumn fx:id="colunaTitulo" prefWidth="151.0" text="Nome" />
-          <TableColumn fx:id="colunaAutor" prefWidth="122.0" text="Email" />
-            <TableColumn fx:id="colunaEditora" prefWidth="114.0" text="Telefone" />
+          <TableColumn fx:id="colunaNome" prefWidth="151.0" text="Nome" />
+          <TableColumn fx:id="colunaEmail" prefWidth="122.0" text="Email" />
+            <TableColumn fx:id="colunaTelefone" prefWidth="114.0" text="Telefone" />
             <TableColumn fx:id="colunaData" prefWidth="173.0" text="Data" />
         </columns>
       </TableView>

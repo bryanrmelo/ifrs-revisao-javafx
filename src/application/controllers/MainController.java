@@ -28,7 +28,7 @@ public class MainController implements Initializable {
 	private TableColumn<Usuario, Integer> colunaId;
 
 	@FXML
-	private TableColumn<Usuario, String> colunaTitulo, colunaAutor, colunaEditora, colunaData;
+	private TableColumn<Usuario, String> colunaNome, colunaEmail, colunaTelefone, colunaData;
 
 	@FXML
 	private Button adicionar, excluir, alterar;
@@ -66,9 +66,9 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		colunaId.setCellValueFactory(new PropertyValueFactory<Usuario, Integer>("id"));
-		colunaTitulo.setCellValueFactory(new PropertyValueFactory<Usuario, String>("titulo"));
-		colunaAutor.setCellValueFactory(new PropertyValueFactory<Usuario, String>("autor"));
-		colunaEditora.setCellValueFactory(new PropertyValueFactory<Usuario, String>("editora"));
+		colunaNome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nome"));
+		colunaEmail.setCellValueFactory(new PropertyValueFactory<Usuario, String>("email"));
+		colunaTelefone.setCellValueFactory(new PropertyValueFactory<Usuario, String>("telefone"));
 		colunaData.setCellValueFactory(new PropertyValueFactory<Usuario, String>("data"));
 
 		try {
